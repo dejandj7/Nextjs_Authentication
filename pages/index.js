@@ -1,21 +1,39 @@
 import Head from 'next/head'
 import Header from '../components/Header'
 import styles from '../styles/Home.module.css'
+import { useSession } from 'next-auth/react'
 
 export default function Home() {
+  const { data: session, status } = useSession()
+  const loading = status === "loading"
+
   return (
     <div className={styles.container}>
       <Head>
         <title>Nextjs | Next-Auth</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-    <Header />
+      <Header />
       <main className={styles.main}>
-         <h1 className={styles.title}>Authentication in Next.js app using Next-Auth</h1>
+        <h1 className={styles.title}>Authentication for Parking</h1>
         <div className={styles.user}>
-        <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80" alt="" className={styles.avatar}/>
-
-        </div>
+           {loading && <div className={styles.title}>Loading...</div>}
+           {
+            session &&
+              <>
+               <p style={{ marginBottom: '10px' }}> Welcome, {session.user.name ?? session.user.email}</p> <br />
+               <img src={session.user.image} alt="" className={styles.avatar} />
+              </>
+            }
+           {
+            !session &&
+              <>
+               <p className={styles.title}>Please Sign in</p>
+               <img src="https://cdn.dribbble.com/users/759083/screenshots/6915953/2.gif" alt="" className={styles.avatar} />
+               <p className={styles.credit}>GIF by <a href="https://dribbble.com/shots/6915953-Another-man-down/attachments/6915953-Another-man-down?mode=media">Another man</a> </p>
+              </>
+           }
+         </div>
       </main>
     </div>
   )
