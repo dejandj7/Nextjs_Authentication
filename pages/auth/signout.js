@@ -3,15 +3,21 @@ import Image from 'next/image'
 import Header from '../../components/header'
 import styles from '../../styles/Signin.module.css'
 
-const Signin = ({ csrfToken, providers }) => {
+const SignOut = ({ csrfToken, providers }) => {
   return (
     <div style={{ overflow: 'hidden', position: 'relative' }}>
       <Header />
       <div className={styles.wrapper} />
       <div className={styles.content}>
         <div className={styles.cardWrapper}>
+          <Image src='/katalog_full.svg' width="196px" height="64px" alt='App Logo' style={{ height: '85px', marginBottom: '20px' }} />
           <div className={styles.cardContent}>
             <input name='csrfToken' type='hidden' defaultValue={csrfToken} />
+            <input placeholder='Email (Not Setup - Please Use Github)' size='large' />
+            <button className={styles.primaryBtn}>
+              Submit
+            </button>
+            <hr />
             {providers &&
               Object.values(providers).map(provider => (
                 <div key={provider.name} style={{ marginBottom: 0 }}>
@@ -29,7 +35,7 @@ const Signin = ({ csrfToken, providers }) => {
   )
 }
 
-export default Signin
+export default SignOut
 
 export async function getServerSideProps(context) {
   const providers = await getProviders()

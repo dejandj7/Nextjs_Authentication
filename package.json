@@ -8,8 +8,14 @@
     "start": "next start"
   },
   "dependencies": {
+    "axios": "^0.27.2",
+    "connect-mongo": "^4.6.0",
+    "express-session": "^1.17.3",
+    "mongodb": "^4.9.1",
     "next": "10.0.1",
     "next-auth": "^4.10.3",
+    "next-connect": "^0.13.0",
+    "next-session": "^4.0.5",
     "react": "17.0.1",
     "react-dom": "17.0.1"
   }
