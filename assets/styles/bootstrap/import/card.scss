@@ -1,0 +1,79 @@
+@import '../../mixins.scss';
+
+/////////////////////////////////////////////////////////////////////////////////////////
+/* CARDS */
+
+.card,
+.card-header,
+.card-footer {
+  border-color: $border;
+  border-radius: calc(7px - 1px);
+}
+
+.card-header,
+.card-footer,
+.card-body {
+  background: transparent;
+  padding: rem(10) rem(10);
+  @media (max-width: $md-max-width) {
+    padding-left: rem(15);
+    padding-right: rem(15);
+  }&.no-padding {
+    padding-left: .75rem;
+    padding-right: .75rem;
+    padding-top: .275rem;
+    padding-bottom: 0.275rem;
+    margin-bottom: auto;
+    background-color: #f2f4f8;
+  }
+
+  &:last-child {
+    border-radius: 0 0 calc(7px - 1px) calc(7px - 1px);
+  }
+
+  &:first-child {
+    border-radius: calc(7px - 1px) calc(7px - 1px) 0 0;
+  }
+}
+
+.card {
+  margin-bottom: rem(15);
+  background: $white;
+
+  &-borderless {
+    border-color: transparent !important;
+  }
+
+  &-solid {
+    color: $white;
+    border-color: transparent !important;
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      color: $white;
+    }
+    .card-header,
+    .card-footer {
+      border-color: rgba($white, 0.3);
+    }
+  }
+}
+
+.card-header {
+  &-flex {
+    display: flex;
+    flex-direction: row;
+    padding-top: 0;
+    padding-bottom: 0;
+    min-height: rem(62);
+  }
+  &-borderless {
+    border-color: transparent !important;
+    + .card-body {
+      padding-top: 0;
+    }
+  }
+}

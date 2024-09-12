@@ -1,15 +1,17 @@
-import { ObjectId } from 'mongodb';
+import nextConnect from 'next-connect';
 
-export default function authentication(req, res, next) {
-  if (req.session.userId) {
+export function authentication(req, res, next) {
+  console.debug('authentication.js')
+  if (req.session) {
     console.log(req.session);
-    // return req.db.collection('users').findOne(ObjectId(req.session.userId))
-    //   .then((user) => {
-    //     if (user) req.user = user;
-    //     return next();
-    //   });
     req.user = req.session.userId;
     return next();
   }
   return next();
 }
+
+const middleware = nextConnect();
+
+middleware.use(authentication);
+
+export default authentication;
